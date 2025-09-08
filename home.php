@@ -26,9 +26,9 @@ $tests = $conn->query("SELECT * FROM tests ORDER BY id ASC");
         <ul>
         <?php while ($test = $tests->fetch_assoc()): ?>
             <li>
-                <a href="quiz.php?test_id=<?php echo $test['id']; ?>">
-                    <?php echo htmlspecialchars($test['title']); ?>
-                </a>
+            <a href="quiz.php?test_id=<?php echo $test['id']; ?>">
+                <?php echo htmlspecialchars($test['title']); ?>
+            </a>
             </li>
         <?php endwhile; ?>
         </ul>

@@ -111,18 +111,19 @@ $questions = $conn->query("SELECT * FROM questions WHERE test_id=$test_id ORDER 
     <button type="submit" name="add_question">Add Question</button>
 </form>
 
-<ul>
+<ol>
 <?php while($q=$questions->fetch_assoc()): ?>
     <li>
+        <!-- Edit question -->
         <form method="post" style="display:inline;">
             <input type="hidden" name="question_id" value="<?php echo $q['id']; ?>">
             <input type="text" name="question_text" value="<?php echo htmlspecialchars($q['question_text']); ?>" required>
-            <button type="submit" name="edit_question">Save </button>
+            <button type="submit" name="edit_question">Save</button>
         </form>
-        <a href="edit_test.php?id=<?php echo $test_id; ?>&delete_question=<?php echo $q['id']; ?>" style="color:red;">Delete </a>
+        <a href="edit_test.php?id=<?php echo $test_id; ?>&delete_question=<?php echo $q['id']; ?>" style="color:red;">Delete</a>
 
         <!-- Answers -->
-        <ul>
+        <ol type="a">
         <?php 
         $answers = $conn->query("SELECT * FROM answers WHERE question_id=".$q['id']." ORDER BY id ASC");
         while($a=$answers->fetch_assoc()): ?>
@@ -131,12 +132,12 @@ $questions = $conn->query("SELECT * FROM questions WHERE test_id=$test_id ORDER 
                     <input type="hidden" name="answer_id" value="<?php echo $a['id']; ?>">
                     <input type="text" name="answer_text" value="<?php echo htmlspecialchars($a['answer_text']); ?>" required>
                     <label><input type="checkbox" name="is_correct" <?php if($a['is_correct']) echo 'checked'; ?>> Correct</label>
-                    <button type="submit" name="edit_answer">Save </button>
+                    <button type="submit" name="edit_answer">Save</button>
                 </form>
-                <a href="edit_test.php?id=<?php echo $test_id; ?>&delete_answer=<?php echo $a['id']; ?>" style="color:red;">Delete </a>
+                <a href="edit_test.php?id=<?php echo $test_id; ?>&delete_answer=<?php echo $a['id']; ?>" style="color:red;">Delete</a>
             </li>
         <?php endwhile; ?>
-        </ul>
+        </ol>
 
         <!-- Add new answer -->
         <form method="post">
@@ -147,6 +148,6 @@ $questions = $conn->query("SELECT * FROM questions WHERE test_id=$test_id ORDER 
         </form>
     </li>
 <?php endwhile; ?>
-</ul>
+</ol>
 </body>
 </html>

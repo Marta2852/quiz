@@ -43,12 +43,15 @@ $tests = $conn->query("SELECT * FROM tests ORDER BY id ASC");
 </form>
 
 <ul>
-<?php while($row=$tests->fetch_assoc()): ?>
-<li>
-    <?php echo htmlspecialchars($row['title']); ?>
-    <a href="edit_test.php?id=<?php echo $row['id']; ?>">Edit</a>
-    <a href="admin_dashboard.php?delete_test=<?php echo $row['id']; ?>" style="color:red;">Delete</a>
-</li>
+<?php while($row = $tests->fetch_assoc()): ?>
+    <li>
+        <a href="quiz.php?test_id=<?php echo $row['id']; ?>">
+            <?php echo htmlspecialchars($row['title']); ?>
+        </a>
+        <!-- Keep edit and delete links -->
+        <a href="edit_test.php?id=<?php echo $row['id'];  ?>" style="color:green">Edit</a>
+        <a href="admin_dashboard.php?delete_test=<?php echo $row['id']; ?>" style="color:red;">Delete</a>
+    </li>
 <?php endwhile; ?>
 </ul>
 </body>
